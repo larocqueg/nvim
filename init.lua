@@ -10,12 +10,28 @@
 --                                                                            --
 -- ************************************************************************** --
 
-vim.cmd("set expandtab")
-vim.cmd("set tabstop=4")
-vim.cmd("set number")
 vim.cmd("syntax on")
+vim.cmd("set nu")
 vim.cmd("set mouse=a")
+vim.cmd("set si")
+vim.cmd("set wrap")
+vim.cmd("set noexpandtab")
+vim.cmd("set tabstop=4")
+vim.cmd("set shiftwidth=4")
+vim.cmd("set softtabstop=4")
+vim.cmd("set autoindent")
+vim.cmd("set smarttab")
 vim.g.mapleader = " "
+
+vim.api.nvim_create_autocmd("FileType", {
+    pattern = { "c", "h" },
+    callback = function()
+        vim.opt.expandtab = false
+        vim.opt.tabstop = 4
+        vim.opt.shiftwidth = 4
+        vim.opt.softtabstop = 4
+    end,
+})
 
 local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
 if not vim.loop.fs_stat(lazypath) then
